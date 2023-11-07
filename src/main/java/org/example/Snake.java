@@ -4,11 +4,10 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Snake {
-    private static final int WIDTH = 20;
-    private static final int HEIGHT = 20;
-    private int x = 250;
-    private int y = 250;
-    private int xd = 1;
+    public static final int SNAKESIZE = 20;
+    private int x = 1;
+    private int y = 1;
+    private int xd = SNAKESIZE;
     private int yd = 0;
     Game game;
 
@@ -17,22 +16,22 @@ public class Snake {
     }
 
     public void paint(Graphics2D graphics){
-        graphics.fillRect(x, y, WIDTH, HEIGHT);
+        graphics.fillRect(x, y, SNAKESIZE, SNAKESIZE);
     }
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_LEFT && xd == 0){
-            xd = -1;
+            xd = -SNAKESIZE;
             yd = 0;
         }else if (e.getKeyCode() == KeyEvent.VK_RIGHT && xd == 0){
-            xd = 1;
+            xd = SNAKESIZE;
             yd = 0;
         }else if (e.getKeyCode() == KeyEvent.VK_UP && yd == 0){
             xd = 0;
-            yd = -1;
+            yd = -SNAKESIZE;
         }else if (e.getKeyCode() == KeyEvent.VK_DOWN && yd == 0){
             xd = 0;
-            yd = 1;
+            yd = SNAKESIZE;
         }
     }
 
@@ -40,7 +39,7 @@ public class Snake {
         x = x + xd;
         y = y + yd;
 
-        if (x == 0 || x + WIDTH == game.getWidth() || y == 0 || y + HEIGHT == game.getHeight()){
+        if (x <= 0 || x + SNAKESIZE >= game.getWidth() || y <= 0 || y + SNAKESIZE-1 >= game.getHeight()){
             game.gameOver();
         }
 
@@ -60,7 +59,7 @@ public class Snake {
     }
 
     public Rectangle getBounds(){
-        return new Rectangle(x, y, WIDTH, HEIGHT);
+        return new Rectangle(x, y, SNAKESIZE, SNAKESIZE);
     }
 
 }
