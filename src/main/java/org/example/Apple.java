@@ -19,8 +19,25 @@ public class Apple {
     }
 
     public void applePosition(){
-        x = (int) (Math.random()*(game.snake.SNAKESIZE-1))*game.snake.SNAKESIZE+1;
-        y = (int) (Math.random()*(game.snake.SNAKESIZE-1))*game.snake.SNAKESIZE+1;
+        int xa;
+        int ya;
+        do {
+            xa = (int) (Math.random()*(game.snake.SNAKESIZE-1))*game.snake.SNAKESIZE+1;
+            ya = (int) (Math.random()*(game.snake.SNAKESIZE-1))*game.snake.SNAKESIZE+1;
+        }while (snakeBodyPosition(xa, ya) == true);
+
+        x = xa;
+        y = ya;
+    }
+
+    public Boolean snakeBodyPosition(int xa, int ya){
+        Boolean collision = false;
+        for (int i = 1; i < game.snake.snakeBody.size(); i++){
+            if (game.snake.snakeBody.get(i).getX() == xa && game.snake.snakeBody.get(i).getY() == ya){
+                collision = true;
+            }
+        }
+        return collision;
     }
 
     public Rectangle getBounds(){

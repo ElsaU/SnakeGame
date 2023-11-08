@@ -9,9 +9,8 @@ public class Game extends JPanel{
     private static final int WIDTH = 500;
     private static final int HEIGHT = 500;
 
-    Apple apple = new Apple(this);
     Snake snake = new Snake(this);
-
+    Apple apple = new Apple(this);
     private int score = 0;
 
     public Game(){

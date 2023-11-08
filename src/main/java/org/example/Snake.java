@@ -11,8 +11,7 @@ public class Snake {
     private int xd = SNAKESIZE;
     private int yd = 0;
     Game game;
-    private ArrayList<Coordinates> snakeBody;
-    private int tailSize = 1;
+    ArrayList<Coordinates> snakeBody;
 
     public Snake(Game game){
         this.game = game;
