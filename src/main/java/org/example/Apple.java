@@ -1,7 +1,6 @@
 package org.example;
 
 import java.awt.*;
-import java.sql.SQLOutput;
 
 public class Apple {
     private static final int DIAMETER = 18;
@@ -12,8 +11,7 @@ public class Apple {
 
     public Apple(Game game){
         this.game = game;
-        x = (int) (Math.random()*(game.snake.SNAKESIZE-1))*game.snake.SNAKESIZE+1;
-        y = (int) (Math.random()*(game.snake.SNAKESIZE-1))*game.snake.SNAKESIZE+1;
+        applePosition();
     }
 
     public void paint(Graphics2D graphics){
@@ -23,7 +21,6 @@ public class Apple {
     public void applePosition(){
         x = (int) (Math.random()*(game.snake.SNAKESIZE-1))*game.snake.SNAKESIZE+1;
         y = (int) (Math.random()*(game.snake.SNAKESIZE-1))*game.snake.SNAKESIZE+1;
-        System.out.println(x + " " + y);
     }
 
     public Rectangle getBounds(){

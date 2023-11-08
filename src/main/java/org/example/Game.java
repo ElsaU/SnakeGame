@@ -59,12 +59,12 @@ public class Game extends JPanel{
         Graphics2D graphics = (Graphics2D) g;
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-
+/*
         for (int i = 0; i<WIDTH/snake.SNAKESIZE; i++){
             graphics.drawLine(0, i*snake.SNAKESIZE, WIDTH, i*snake.SNAKESIZE);
             graphics.drawLine(i*snake.SNAKESIZE, 0, i*snake.SNAKESIZE, HEIGHT);
         }
-
+*/
         graphics.setColor(Color.RED);
         apple.paint(graphics);
         graphics.setColor(Color.GREEN);
@@ -88,7 +88,4 @@ public class Game extends JPanel{
         score++;
     }
 
-    public int getScore(){
-        return score;
-    }
 }

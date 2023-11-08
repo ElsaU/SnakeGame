@@ -2,21 +2,31 @@ package org.example;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Snake {
     public static final int SNAKESIZE = 20;
     private int x = 1;
-    private int y = 1;
+    private int y = 21;
     private int xd = SNAKESIZE;
     private int yd = 0;
     Game game;
+    private Coordinates coordinates;
+    private ArrayList<Coordinates> snakeBody;
+    private int tailSize = 1;
 
     public Snake(Game game){
         this.game = game;
+        snakeBody = new ArrayList<Coordinates>();
     }
 
     public void paint(Graphics2D graphics){
         graphics.fillRect(x, y, SNAKESIZE, SNAKESIZE);
+
+        for (int i=0; i < snakeBody.size(); i++) {
+            Coordinates snakePart = snakeBody.get(i);
+            graphics.fillRect((snakePart.getX()), snakePart.getY(), SNAKESIZE, SNAKESIZE);
+        }
     }
 
     public void keyPressed(KeyEvent e){
@@ -36,22 +46,32 @@ public class Snake {
     }
 
     public void move(){
-        x = x + xd;
-        y = y + yd;
-
         if (x <= 0 || x + SNAKESIZE >= game.getWidth() || y <= 0 || y + SNAKESIZE-1 >= game.getHeight()){
             game.gameOver();
         }
 
         if (collision()){
+            snakeBody.add(new Coordinates(x, y));
             game.upgradeScore();
             game.apple.applePosition();
-            upgradeSnake();
         }
+
+        paintTail();
+
+        x = x + xd;
+        y = y + yd;
     }
 
-    private void upgradeSnake() {
-
+    private void paintTail(){
+        for (int i=snakeBody.size()-1; i >= 0 ; i--) {
+            if (i == 0){
+                snakeBody.get(i).setX(x);
+                snakeBody.get(i).setY(y);
+            }else {
+                snakeBody.get(i).setX(snakeBody.get(i-1).getX());
+                snakeBody.get(i).setY(snakeBody.get(i-1).getY());
+            }
+        }
     }
 
     public Boolean collision(){
