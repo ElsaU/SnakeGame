@@ -11,13 +11,12 @@ public class Snake {
     private int xd = SNAKESIZE;
     private int yd = 0;
     Game game;
-    private Coordinates coordinates;
     private ArrayList<Coordinates> snakeBody;
     private int tailSize = 1;
 
     public Snake(Game game){
         this.game = game;
-        snakeBody = new ArrayList<Coordinates>();
+        snakeBody = new ArrayList<>();
     }
 
     public void paint(Graphics2D graphics){
@@ -46,11 +45,11 @@ public class Snake {
     }
 
     public void move(){
-        if (x <= 0 || x + SNAKESIZE >= game.getWidth() || y <= 0 || y + SNAKESIZE-1 >= game.getHeight()){
+        if (x <= 0 || x + SNAKESIZE >= game.getWidth() || y <= 0 || y + SNAKESIZE-1 >= game.getHeight() || bodyCollision()){
             game.gameOver();
         }
 
-        if (collision()){
+        if (appleCollision()){
             snakeBody.add(new Coordinates(x, y));
             game.upgradeScore();
             game.apple.applePosition();
@@ -74,8 +73,18 @@ public class Snake {
         }
     }
 
-    public Boolean collision(){
+    public Boolean appleCollision(){
         return game.apple.getBounds().intersects(getBounds());
+    }
+
+    public Boolean bodyCollision(){
+        Boolean collision = false;
+        for (int i = 1; i < snakeBody.size(); i++){
+            if (snakeBody.get(i).getX() == x && snakeBody.get(i).getY() == y){
+                collision = true;
+            }
+        }
+        return collision;
     }
 
     public Rectangle getBounds(){

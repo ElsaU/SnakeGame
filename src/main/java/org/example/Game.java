@@ -39,7 +39,6 @@ public class Game extends JPanel{
         Game game = new Game();
         game.setBackground(Color.BLACK);
         frame.add(game);
-        //frame.pack();
         frame.setSize(WIDTH, HEIGHT);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
